@@ -10,6 +10,23 @@ var app = angular.module('navApp', ['ionic', 'swipe', 'wu.masonry', 'ab-base64',
 })*/
 
 // RUTAS
+module.factory('Camera', ['$q', function($q) {
+
+  return {
+    getPicture: function(options) {
+      var q = $q.defer();
+
+      navigator.camera.getPicture(function(result) {
+        // Do any magic you need
+        q.resolve(result);
+      }, function(err) {
+        q.reject(err);
+      }, options);
+
+      return q.promise;
+    }
+  }
+}]);
 
 app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider,$compileProvider) {
 
@@ -136,16 +153,11 @@ app.controller('GalleryCtrl', function($scope, $http, $ionicModal, $ionicActionS
                  buttonClicked: function(index) {
 			if(index === 0){ // Manual Button
 				alert('Camara'+$img);
-				navigator.camera.getPicture(function(imageURI) {
-
-				    // imageURI is the URL of the image that we can use for
-				    // an <img> element or backgroundImage.
-
-				  }, function(err) {
-
-				    // Ruh-roh, something bad happened
-
-				  }, cameraOptions);
+			 Camera.getPicture().then(function(imageURI) {
+      console.log(imageURI);
+    }, function(err) {
+      console.err(err);
+    });
 		 	}
 		       	else if(index === 1){
 				alert('Galeria');
