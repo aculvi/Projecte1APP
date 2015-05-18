@@ -86,7 +86,7 @@ app.factory('Camera', ['$q', function($q) {
 }]);
 // CONTROLADORES
 
-app.controller('GalleryCtrl', function($scope, $http, $ionicModal, $ionicActionSheet){
+app.controller('GalleryCtrl', function($scope, $http, $ionicModal, $ionicActionSheet,Camera){
     $scope.title = "Galeria";
 
     getPosts();
