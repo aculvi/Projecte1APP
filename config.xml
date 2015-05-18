@@ -65,8 +65,7 @@
 	<gap:plugin name="org.apache.cordova.file"  />
 	<gap:plugin name="org.apache.cordova.camera" />
 	<gap:plugin name="org.apache.cordova.media-capture" />
-7
-	
+
 	<feature name="Camera">
     	<param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
 	</feature>
