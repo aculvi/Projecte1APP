@@ -11,7 +11,7 @@ var app = angular.module('navApp', ['ionic', 'swipe', 'wu.masonry', 'ab-base64',
 
 // RUTAS
 
-app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider,$compileProvider) {
 
   $ionicConfigProvider.tabs.position('bottom');
   $ionicConfigProvider.tabs.style("standard");
@@ -65,7 +65,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
       }
 
     })
-
+	$compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
 });
 
 // CONTROLADORES
@@ -125,8 +125,8 @@ app.controller('GalleryCtrl', function($scope, $http, $ionicModal, $ionicActionS
           console.log('Modal is shown!');
         });
 
-        $scope.openOptions = function() {
-                $ionicActionSheet.show({
+        $scope.openOptions = function($img) {
+             $ionicActionSheet.show({
                  buttons: [
                    { text: 'Camara' },
                    { text: 'Imagen desde galeria' }
@@ -134,6 +134,22 @@ app.controller('GalleryCtrl', function($scope, $http, $ionicModal, $ionicActionS
                  titleText: 'Nueva fotografia',
                  cancelText: 'Cancelar',
                  buttonClicked: function(index) {
+			if(index === 0){ // Manual Button
+				alert('Camara'+$img);
+				navigator.camera.getPicture(function(imageURI) {
+
+				    // imageURI is the URL of the image that we can use for
+				    // an <img> element or backgroundImage.
+
+				  }, function(err) {
+
+				    // Ruh-roh, something bad happened
+
+				  }, cameraOptions);
+		 	}
+		       	else if(index === 1){
+				alert('Galeria');
+		       }
                    return true;
                  }
                });
@@ -155,7 +171,13 @@ app.controller('TodayCtrl', function($scope, $ionicModal, $ionicSlideBoxDelegate
          titleText: 'Nueva fotografia',
          cancelText: 'Cancelar',
          buttonClicked: function(index) {
-           return true;
+		if(index === 0){ // Manual Button
+		 alert('Camara');
+	       }
+	       else if(index === 1){
+		alert('Galeria');
+	       }
+	       return true;
          }
        });
     }
