@@ -13,7 +13,7 @@
     <author email="info@globals.cat" href="http://www.globals.cat">
         Globals
     </author>
-    <feature name="http://api.phonegap.com/3.3.0/device" />
+    <feature name="http://api.phonegap.com/3.7.0/device" />
     <preference name="permissions" value="none" />
     <preference name="orientation" value="portrait" />
     <preference name="target-device" value="universal" />
@@ -65,10 +65,7 @@
 	<gap:plugin name="org.apache.cordova.file"  />
 	<gap:plugin name="org.apache.cordova.camera" />
 	<gap:plugin name="org.apache.cordova.media-capture" />
-	
-	<gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="3.0.2" />
-	<plugin name="PushNotification" value="com.pushwoosh.plugin.pushnotifications.PushNotifications" onload="true"/>
-    <access origin="https://cp.pushwoosh.com" subdomains="true" />
+7
 	
 	<feature name="Camera">
     	<param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
